@@ -1,7 +1,7 @@
 import pygame as py
 import sys, json
 
-from utils.objects import EntityManager, World, create_plant, create_prey, update_display
+from utils.objects import EntityManager, World, create_plant, create_prey, update_display, update_movement
 from utils.functions import draw_grid
 
 # Initialize the simulation
@@ -28,15 +28,24 @@ grid_cell_size = int(WIDTH / grid_width)
 
 # Clock for controlling FPS
 clock = py.time.Clock()
-FPS = 60
+FPS = 20
 
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 create_plant(world, entity_manager.get_next_eid(), 10, 10)
+create_plant(world, entity_manager.get_next_eid(), 11, 9)
+create_plant(world, entity_manager.get_next_eid(), 14, 9)
+create_plant(world, entity_manager.get_next_eid(), 10, 13)
+create_plant(world, entity_manager.get_next_eid(), 12, 12)
+create_plant(world, entity_manager.get_next_eid(), 8, 11)
+create_plant(world, entity_manager.get_next_eid(), 19, 16)
+create_plant(world, entity_manager.get_next_eid(), 13, 13)
 create_plant(world, entity_manager.get_next_eid(), 15, 12)
 create_plant(world, entity_manager.get_next_eid(), 32, 18)
+
+create_prey(world, entity_manager.get_next_eid(), 20, 9)
 
 world.print_info()
 
@@ -55,6 +64,8 @@ while running:
 
     """ ALL LOGIC """
     draw_grid(screen, map_data, grid_width, WIDTH, HEIGHT, True)
+
+    update_movement(world)
 
     update_display(world, screen, grid_cell_size)
 

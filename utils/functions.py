@@ -9,10 +9,6 @@ def draw_grid(screen, map_data, num_rect_x, width, height, show=True):
         print(CELL_SIZE)
         print(num_rect_x)
 
-    colour = (0, 0, 0)
-    if show:
-        colour = (255, 255, 255)
-
     i = 0
     for row in range(num_rect_y):
         for col in range(num_rect_x):
@@ -24,4 +20,10 @@ def draw_grid(screen, map_data, num_rect_x, width, height, show=True):
             )
             py.draw.rect(screen, map_data[i]["colour"], rect, 0)
 
+            if show:
+                py.draw.rect(screen, (10, 10, 10), rect, 1)
+
             i += 1
+
+def calc_grid_pos(a, grid_cell_size):
+    return ((a * grid_cell_size) // grid_cell_size) * grid_cell_size
